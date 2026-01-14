@@ -31,6 +31,7 @@ public class TaskController {
         var idUser = request.getAttribute("idUser");
         taskModel.setIdUser((UUID) idUser);
 
+        //Verificação de datas
         var currentDate = LocalDateTime.now();
         if (currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -74,7 +75,7 @@ public class TaskController {
 
         var taskreturn = this.taskRepository.save((task));
 
-        return ResponseEntity.ok().body(this.taskRepository.save(taskreturn));
+        return ResponseEntity.ok().body(taskreturn);
 
     }
 
